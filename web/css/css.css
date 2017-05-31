@@ -1,0 +1,108 @@
+.clearfix::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+* {
+    box-sizing: border-box;
+}
+body{
+    min-height: 1200px;
+	background: url(../img/banner.jpg) no-repeat center top;
+}
+.topMenu a{
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+}
+.topMenu a:hover{
+	color: #339BEB;
+	text-shadow: 2px 1px 1px rgba(0,0,0,.6);	
+	transition: all .6s;
+	
+}
+.topMenu{
+	float: right;
+}
+.topMenu ul{
+	list-style-type: none;
+	padding-top: 0;
+	margin: -75px 200px auto auto;
+	
+}
+.topMenu li{
+	float: left;
+	margin: 20px;
+	
+}
+.topMenu li:hover{
+	border: 1px rgba(255,255,255);
+}
+.logo img{
+	vertical-align: middle;
+	
+}
+.logo a{
+	text-decoration: none;
+	font-size: 3.6em;
+	font-family: 'Dancing Script', cursive;
+	vertical-align: middle;
+	color: white;
+}
+.logo:hover{
+	transition: all .3s;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+}
+.logo {
+	float: left;
+	margin: 16px auto 10px 200px;
+
+}
+header{
+	width: 100%;
+	padding: 5px 0px;
+	background-color: rgba(0,0,0,.1);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	transition: all .5s;
+}
+header.on{
+	padding: 10px 0;
+	background-color: rgba(0,0,0,.8);
+}
+h1 span {
+	color: rgb(51,155,235);
+}
+h1{
+	color: white;
+}
+.banner {
+    text-align: center;
+    margin-top: 300px;
+    line-height: 2.5;
+}
+h1{
+	text-shadow: 1px 2px 1px rgba(0,0,0,.6);
+}
+p{
+	text-align: left;
+	width:750px;
+   display: block;
+   margin-left: 400px;
+   line-height: 1.8;
+   color: white;
+   font-family: "瀵邦喛钂嬮梿鍛寸拨";
+}
+p span{
+	color: black;
+	background: rgba(194,218,226,.2);
+/*	display: inline-block;*/
+	height: 25px;
+	padding: 2px 4px;
+	cursor: pointer;
+}
+p span:hover{
+	background: rgba(194,218,226,.8);
+	transition: all .5s;
