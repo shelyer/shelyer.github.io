@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>简易时钟</title>
+		<style type="text/css">
+			#clock{
+				width: 617px;
+				height: 518px;
+				position: relative;
+				background: url(img/01.jpg) no-repeat;
+				background-size: 92%;
+				margin: 0 auto;
+			}
+			#hour{
+				width: 1.2%;
+				height: 23%;
+				background-color: #000;
+				position: absolute;
+				left: 49.3%;
+				top:27%;
+				-webkit-transform-origin: 50% 100%;
+			}
+			#min{
+				width: 1%;
+				height: 30%;
+				background-color: #000;
+				position: absolute;
+				left: 49.5%;
+				top: 20%;
+				-webkit-transform-origin: 50% 100%;
+			}
+			#sec{
+				width: 0.6%;
+				height: 35%;
+				background-color: #FFC1C1;
+				position: absolute;
+				left: 49.7%;
+				top:15%;
+				-webkit-transform-origin: 50% 100%;
+			}
+			#date{			
+			color: #000;
+			background-color: #B0E2FF;
+			font-size: 10em;
+			font-family:arial ;
+			text-align: center;			
+			width: 800px;
+			height: 180px;
+			margin:auto;
+			/*margin-top: 600px;*/
+			border: 5px solid #FFC1C1;
+		}
+		</style>
+	</head>
+	<body>
+		<!--定义-->
+		<div id="clock">
+			<div id="hour"></div>
+			<div id="min"></div>
+			<div id="sec"></div>
+		</div>
+		<div id="date">
+			
+	     </div>
+		<script type="text/javascript">
+			//1.时钟部分
+			var now;
+			var oClock = document.getElementById("clock");
+			var oHour = document.getElementById("hour");
+			var oMin = document.getElementById("min");
+			var oSec = document.getElementById("sec");
+			//执行函数
+			function runTime () {
+				now=new Date();
+				var sec=now.getSeconds()*360/60;
+				var min=(now.getMinutes()+now.getSeconds()/60)*6;
+				var hour=(now.getHours()+now.getMinutes()/60+now.getSeconds()/3600)*30;
+				oHour.style.webkitTransform="rotate("+hour+"deg)";
+				oMin.style.webkitTransform="rotate("+min+"deg)";
+				oSec.style.webkitTransform="rotate("+sec+"deg)";
+			}
+			//间隔1000ms,执行runTime函数
+			setInterval("runTime()",1000);
+			//2.数字时钟部分
+			function time () {
+				//先定义一个date类,再获取
+			    var mydate=new Date();
+				var h = mydate.getHours();
+				var m = mydate.getMinutes();
+				var s = mydate.getSeconds();
+				document.getElementById('date').innerHTML=h+":"+checktime(m)+":"+checktime(s);
+			
+			}
+			//判断数字
+			function checktime(num){
+				if(num<10){
+					num="0"+num;
+				}
+				return num;
+			}
+			//延迟1000ms，执行time函数
+			//setTimeout(time,1000);
+		    time();
+			setInterval(time,1000);//1000毫秒=1秒；这边1秒更新一次
+			
+		</script>
+	</body>
+</html>
