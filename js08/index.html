@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body{
+				background-color: bisque;
+				padding: 0;
+				margin: 0;
+			}
+			#k{
+				width: 500px;
+				height: 200px;
+				margin: auto;
+				margin-top: 10px;
+			}
+			#word{
+				width: 300px;
+				height: 50px;
+				margin: auto;
+				font-size: 20px;
+				font-family: "宋体";
+				line-height: 50px;
+				text-align: center;
+				margin-top: 20px;
+			}
+			input{
+				width: 113px;
+				height: 50px;
+				margin-right: 50px;
+				margin-bottom: 30px;
+				border: none;
+				outline: 0;
+				background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+			<div id="word"></div>
+			<div id="k">
+			<input type="button" id="" value=" 1" />
+			<input type="button" id="" value=" 2" />
+			<input type="button" id="" value=" 3" />
+			<input type="button" id="" value=" 4" />
+			<input type="button" id="" value=" 5" />
+			<input type="button" id="" value=" 6" />
+		</div>
+		<script type="text/javascript">
+			var oinputs=document.querySelectorAll("#k input");
+			var oword=document.getElementById("word");
+			var i;
+			for(i=0;i<oinputs.length;i++){
+				oinputs[i].addEventListener("click",(function(index){
+					return function(){
+						oword.innerHTML="你点击了 "+index
+					 };
+				   }(i+1)
+				 )	
+				);
+			}
+		</script>
+	</body>
+</html>
