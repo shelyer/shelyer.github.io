@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.tooltip{
+				position: relative;
+			}
+			.tooltip span{
+				width: 180px;
+				padding: 5px 10px;
+				color: #FFFFFF;
+				background: #000000;
+				text-align: center;
+				border-radius: 2px;
+				position: absolute;
+				left: -90px;
+				top: -40px;
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity .5s; 
+			}
+			.tooltip span::after{
+				content: "";
+				width: 0;
+				height: 0;
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -8px;
+				border-top: 8px solid black;
+				border-right: 8px solid transparent;
+				border-left: 8px solid transparent;
+			}
+			.tooltip span.show{
+				opacity: 1;
+				visibility: visible;
+			}
+			p,h2{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+	    <h2>你是猪吗？</h2>
+	    <p><a href="#" class="tooltip" data-content="橙子">我是：</a></p>
+		<p><a href="#" class="tooltip" data-content="起床">早上</a> 
+		   <a href="#" class="tooltip" data-content="吃鸡">中午</a>
+		   <a href="#" class="tooltip" data-content="吃饭">下午</a>
+		   <a href="#" class="tooltip" data-content="睡觉">晚上</a>
+		</p>
+		</div> 
+		<script type="text/javascript">
+			var tips =document.querySelectorAll('.tooltip');
+			if(tips.length==0){
+				console.log("没有提示");
+			}else{
+				for(var i=0;i<tips.length;i++){
+					var content = document.createElement('span');
+					var date = tips[i].hasAttribute('data-content')?tips[i].getAttribute('data-content'):'提示为空';
+					content.innerHTML = date;
+					tips[i].appendChild(content);
+					tips[i].addEventListener("mouseover",mouseoverHandler);
+					tips[i].addEventListener("mouseout",mouseoutHandler);
+				}
+			}			
+			function mouseoverHandler(){
+				var event = event||window.event;
+				var target = event.target||event.srcElement;
+				var targetSpan = target.getElementsByTagName('span')[0];
+				targetSpan.classList.add('show');
+			}
+			function mouseoutHandler(){
+				var event = event||window.event;
+				var target = event.target||event.srcElement;
+				var targetSpan = target.getElementsByTagName('span')[0];
+				targetSpan.classList.remove('show');
+			}
+		</script>
+	</body>
+</html>
