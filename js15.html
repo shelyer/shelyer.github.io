@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			input{
+				width: 60px;
+				height: 60px;
+			}
+            #toblack{
+            	background-color: black;
+            }
+            #towhite{
+            	background-color: white;
+            }
+
+		</style>
+	</head>
+	<body id="">
+		<input type="button" id="black" value="黑色"  style=";" />
+		<input type="button" id="white" value="白色" style=";" />
+
+
+		
+		<script type="text/javascript">
+         var btnBlack = document.getElementById('black');
+         var btnWhit = document.getElementById('white');
+         
+         btnBlack.addEventListener('click',setBlack);
+         btnWhit.addEventListener('click',setWhite);
+
+         function setBlack(){
+         	document.body.id = "toblack";
+         	var id=document.body.id;
+         	localStwhite.setItem('getId',id);
+         }
+         function setWhite(){
+         	document.body.id = "towhite";
+         	var id=document.body.id;
+         	localStwhite.setItem('getId',id);
+         }
+           
+           
+        var curId = localStwhite.getItem('getId');
+        if(curId != null){
+        	document.body.id = curId;
+        }
+           
+            
+		</script>
+	</body>
+</html>
+
