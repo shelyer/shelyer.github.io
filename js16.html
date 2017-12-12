@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#textarea{
+				width: 300px;
+				height: 100px;
+				border: 1px dashed black;
+			}
+			p{
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="textarea">
+			<p id="text"></p>
+			<!--<p id="text1" style="display: none;">火山火山<br />火山火山</p>
+			<p id="text2" style="display: none;">我是火山我是火山<br />我是火山我是火山</p>
+			<p id="text3" style="display: none;">滴滴滴滴滴滴<br />滴滴滴滴滴滴</p>-->
+		</div>
+		
+		<script type="text/javascript">
+			var getText=document.getElementById('text');
+			var i=0;
+			var getArea = document.getElementById('textarea');
+			var a=true;
+			function changeText(){
+				i = i+1;
+				if(a==true){
+					if(i==1){
+					getText.innerText = "火山火山";
+                    
+				}
+				if(i==2){
+					getText.innerText = "我是火山我是火山";
+				}
+				if(i==3){
+					getText.innerText = "滴滴滴滴滴滴";
+				}
+				if(i>=3){
+					i=0;
+				}
+				}
+				
+				
+			}var flag = setInterval("changeText()",1000);
+			
+			if(a==false){
+				clearInterval(flag);
+			}
+			
+			getArea.addEventListener('mouseover',function(){
+				a=false;
+			})
+			getArea.addEventListener('mouseout',function(){
+				a=true;
+			})
+		</script>
+	</body>
+</html>
