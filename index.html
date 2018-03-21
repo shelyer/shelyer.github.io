@@ -1,67 +1,129 @@
 
+
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
-		<title>选项卡</title>
-		<style>
-			.clearfix::after {
-				content: "";
-				clear: both;
-				display: block;
-			}			
-			.tabs {
-				
-			}			
-			.tabs .tabItems {}			
-			.tabs .tabItems .item {
-				padding: 10px 30px;
-				float: left;
-				border-radius: 2px 2px 0px 0px;
-				margin: 0px 2px;
-				cursor: pointer;
-			}			
-			.tabContents .content {
-				width: 600px;
-				min-height: 300px;
+		<title></title>
+		<style type="text/css">
+			*{
+				box-sizing: border-box;
 			}
-			.tabs div div:nth-child(1){
-				background-color: #fdd;
+			#app{
+				width: 500px;
+				max-height: 500px;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				overflow: hidden;
+				box-shadow: 0px 0px 6px rgba(0,0,0,.6);
+				padding: 30px;
+				background-color: #ff6666;
+				border: 10px solid #eeeeee;
 			}
-			.tabs div div:nth-child(2){
-				background-color: #dfd;
+			#app header{
+				color: #fff;
 			}
-			.tabs div div:nth-child(3){
-				background-color: #ddf;
+			#app header h1{
+				margin: 0;
+			}
+			#app input{
+				width: 100%;
+				border: none;
+				outline: none;
+				padding: 1rem;
+			}			
+			#app ul{
+				margin: 0;
+				padding: 0;
+				max-height: 280px;
+				overflow-y: auto;
+			}
+			#app li{
+				list-style-type: none;
+				background-color: rgba(255,255,255,.5);
+				margin: .3rem 0;
+				padding: 0.5rem;
+				vertical-align: middle;
+				position: relative;
+			}
+			#app li.done{
+				text-decoration: line-through;
+			}
+			#app li .group{
+				position: absolute;
+				right: 1rem;
+				top: .5rem;
 			}
 		</style>
 	</head>
 
 	<body>
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-		<div class="tabs">
-			<div class="tabItems clearfix">
-				<div class="item" v-for="(item,index) in tabs" @click="clickIt(index)">{{item}}</div>
-			</div>
-			<div class="tabContents">
-				<div class="content" v-for="(item,index) in tabContents" v-show="nowindex==index">{{item}}</div>
-			</div>
+		<div id="app">
+			<header>
+				<h1>备忘录</h1>
+				<p>利用vue实现的简单备忘录</p>
+			</header>
+			
+			<input  v-model="newTodoText" @keyup.enter="addItem" placeholder="添加事项">
+			<ul>
+				<li v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" :class="{'done':todo.done}">
+					{{"第"+(index+1)+"件事："+todo.title}}
+					<div class="group">
+						<button title="完成" @click="doneItem(index)" :disabled="todo.done">{{todo.done?'done':'√'}}</button>
+						<button title="删除" @click="removeItem(index)">×</button>
+					</div>
+				</li>
+			</ul>
 		</div>
 		<script type="text/javascript">
-			var app=new Vue({
-				el:".tabs",
-				data:{
-					tabs:['新闻','通知','公告'],
-					tabContents:['新闻内容','通知内容','公告内容'],
-					nowindex:0,
+			var todoStorage={
+				fetch:function () {
+					var todos=JSON.parse(localStorage.getItem('todo')||'[]');
+					return todos;
 				},
-				methods:{
-					clickIt:function(i){
-						this.nowindex=i;
-						console.log(i);
+				save:function (todos) {
+					localStorage.setItem('todo',JSON.stringify(todos));
+				}
+			};
+			new Vue({
+				el: '#app',
+				data: {					
+					newTodoText: '',
+					todos:todoStorage.fetch(),
+				},
+				watch:{
+					todos:{
+						handlder:function (val,oldVal) {
+						todoStorage,save(val);
+						},
+						deep:true
+					}
+				},
+				methods: {
+					addItem: function() {
+						if(this.newTodoText!=""){						
+						this.todos.push({
+							id: this.nextTodoId++,
+							title: this.newTodoText,
+							done:false,							
+						});
+						this.newTodoText = '';
+						}
+					},
+					removeItem:function(i){
+						this.todos.splice(i, 1);
+					},
+					doneItem:function(i){
+						this.todos[i].done=true;
 					}
 				}
-			});
+			})
 		</script>
 	</body>
 
